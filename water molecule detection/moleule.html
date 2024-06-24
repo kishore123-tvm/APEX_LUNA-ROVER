@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Water Molecule Detection</title>
+  </head>
+  <body>
+    </section>
+    <h1>Water content Analysis</h1>
+    <canvas id="canvas"></canvas>
+    <script src="water.js"></script>
+    <script src="https://docs.opencv.org/master/opencv.js"></script>
+  <script>  
+  const videoElement = document.getElementById('videoElement');
+const canvasElement = document.getElementById('canvasElement');
+const context = canvasElement.getContext('2d');
+let moleculeCount = 0;
+
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then(stream => {
+    videoElement.srcObject = stream;
+    videoElement.play();
+  })
+  .catch(error => {
+    console.error('Error accessing webcam:', error);
+  });
+
+function processFrame() {
+  context.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+
+  // Detect water molecules using OpenCV.js
+  // Update moleculeCount with the number of water molecules detected
+
+  // Draw the number of molecules detected on the video feed
+  context.fillStyle = 'white';
+  context.font = '24px sans-serif';
+  context.fillText('Water Molecules: ' + moleculeCount, 20, 40);
+
+  requestAnimationFrame(processFrame);
+}
+
+requestAnimationFrame(processFrame);
+
+
+
+  </script>   
+  </body>
+</html>
+
+
+ 
